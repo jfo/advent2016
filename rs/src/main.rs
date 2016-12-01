@@ -1,6 +1,11 @@
 use std::io::prelude::*;
 use std::fs::File;
 
+const NORTH : (i32, i32) = (0,  1);
+const EAST  : (i32, i32) = (1,  0);
+const SOUTH : (i32, i32) = (0, -1);
+const WEST  : (i32, i32) = (-1, 0);
+
 // will take a vector of turns "L" and "R" and map over them to produce a vector of cardinal
 // directions
 // NORTH = [0,  1]
@@ -18,9 +23,12 @@ fn main() {
     let len = s.len();
     s.truncate(len - 1);
 
-    for e in s.split(", ") {
-        println!("{:?}", e);
-    }
+    let thing: Vec<_> = [1,2,3].iter().zip([4,5,6].iter()).map(|e| e.0 + e.1).collect();
+    println!("{:?}", thing);
+
+    // for e in s.split(", ") {
+    //     println!("{:?}", e);
+    // }
 }
 
 // if an instruction is modelled like, say, go north for 5 blocks:
