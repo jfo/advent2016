@@ -1,2 +1,2 @@
-rs/target/*
-rs/Cargo.lock
+rust/target/*
+rust/Cargo.lock
