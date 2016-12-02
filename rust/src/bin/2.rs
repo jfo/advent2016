@@ -16,22 +16,20 @@ fn main() {
     f.read_to_string(&mut s).unwrap();
     let keys = s
         .split("\n")
-        .map({|token| token.chars()})
         .map({|tokenlist|
-            tokenlist.fold((1,1), {|coord, dir|
+            tokenlist.chars().fold((1,1), {|coord, dir|
                 match dir {
-                    'U' => (coord.0 - 1, coord.1),
-                    'D' => (coord.0 + 1, coord.1),
-                    'R' => (coord.0, coord.1 + 1),
-                    'L' => (coord.0, coord.1 - 1),
-                     _ => coord
+                    'U' => (clamp(coord.0 - 1, 0,2), coord.1),
+                    'D' => (clamp(coord.0 + 1, 0,2), coord.1),
+                    'R' => (coord.0, clamp(coord.1 + 1, 0,2)),
+                    'L' => (coord.0, clamp(coord.1 - 1, 0,2)),
+                     _ => panic!("Malformed input")
                 }
             })
-        }).map(|e| (clamp(e.0, 0,2), clamp(e.1, 0,2)));
+        })
+        .map(|coord| GRID_ONE[coord.0 as usize][coord.1 as usize]);
 
     for i in keys {
-        let y = i.0 as usize;
-        let x = i.1 as usize;
-        print!("{:?}", GRID_ONE[y][x]);
+        print!("{:?}", i);
     }
 }
