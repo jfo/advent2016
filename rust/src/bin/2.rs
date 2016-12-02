@@ -14,6 +14,9 @@ fn main() {
     let mut f = File::open("../inputs/2.txt").unwrap();
     let mut s = String::new();
     f.read_to_string(&mut s).unwrap();
+    let len = s.len();
+    s.truncate(len - 1);
+
     let keys: Vec<i32> = s
         .split("\n")
         .map({|tokenlist|
