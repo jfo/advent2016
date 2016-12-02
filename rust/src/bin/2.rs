@@ -14,7 +14,7 @@ fn main() {
     let mut f = File::open("../inputs/2.txt").unwrap();
     let mut s = String::new();
     f.read_to_string(&mut s).unwrap();
-    let keys = s
+    let keys: Vec<i32> = s
         .split("\n")
         .map({|tokenlist|
             tokenlist.chars().fold((1,1), {|coord, dir|
@@ -27,9 +27,8 @@ fn main() {
                 }
             })
         })
-        .map(|coord| GRID_ONE[coord.0 as usize][coord.1 as usize]);
+        .map(|coord| GRID_ONE[coord.0 as usize][coord.1 as usize])
+        .collect();
 
-    for i in keys {
-        print!("{:?}", i);
-    }
+    println!("{:?}", keys);
 }
