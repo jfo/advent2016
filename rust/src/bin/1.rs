@@ -20,19 +20,10 @@ fn main() {
     s.truncate(len - 1);
     let tokens = s.split(", ");
 
-    let directions = tokens.clone().scan(0, {|orientation, e|
+    let directions = tokens.clone().scan(0, {|o, e|
         match e.chars().next().unwrap() {
-            'L' => if *orientation == 0 {
-                *orientation += 3;
-                Some(CARDINALS[*orientation])
-            } else {
-                *orientation -= 1;
-                Some(CARDINALS[*orientation])
-            },
-            'R' => {
-                *orientation = (*orientation + 1) % 4;
-                Some(CARDINALS[*orientation])
-            }
+            'L' => Some(CARDINALS[{*o = (*o + 3) % 4; *o}]),
+            'R' => Some(CARDINALS[{*o = (*o + 1) % 4; *o}]),
              _  => None,
         }
     });
