@@ -19,8 +19,8 @@ fn main() {
 
     let keys: Vec<i32> = s
         .split("\n")
-        .map({|tokenlist|
-            tokenlist.chars().fold((1,1), {|coord, dir|
+        .map(|tokenlist|
+            tokenlist.chars().fold((1,1), |coord, dir|
                 match dir {
                     'U' => (clamp(coord.0 - 1, 0,2), coord.1),
                     'D' => (clamp(coord.0 + 1, 0,2), coord.1),
@@ -28,8 +28,8 @@ fn main() {
                     'L' => (coord.0, clamp(coord.1 - 1, 0,2)),
                      _ => panic!("Malformed input")
                 }
-            })
-        })
+            )
+        )
         .map(|coord| GRID_ONE[coord.0 as usize][coord.1 as usize])
         .collect();
 
