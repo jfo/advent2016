@@ -1,7 +1,6 @@
 extern crate nalgebra;
 use std::io::prelude::*;
 use std::fs::File;
-use nalgebra::clamp;
 use std::collections::HashSet;
 
 
@@ -41,10 +40,10 @@ fn main() {
     let len = s.len();
     s.truncate(len - 1);
 
-    let keys: Vec<i32> = s
+    let keys: String = s
         .split("\n")
         .map(|tokenlist|
-            tokenlist.chars().fold((1,1), |coord, dir| {
+            tokenlist.chars().fold((2,0), |coord, dir| {
                 let newcoord = match dir {
                     'U' => (coord.0 - 1, coord.1),
                     'D' => (coord.0 + 1, coord.1),
@@ -52,7 +51,7 @@ fn main() {
                     'L' => (coord.0, coord.1 - 1),
                     _ => panic!("Malformed input")
                 };
-                if (allowed.contains(&newcoord)) {
+                if allowed.contains(&newcoord) {
                     return newcoord;
                 } else {
                     return coord;
@@ -60,7 +59,10 @@ fn main() {
             })
         )
         .map(|coord| GRID[coord.0 as usize][coord.1 as usize])
-        .collect();
+        .map(|e| format!("{:x}", e))
+        .collect::<Vec<String>>()
+        .join("")
+        .to_uppercase();
 
-    println!("{:?}", keys);
+    println!("{}", keys);
 }
