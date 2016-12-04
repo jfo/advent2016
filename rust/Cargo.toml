@@ -5,3 +5,4 @@ authors = ["Jeff Fowler <jeffowler@gmail.com>"]
 
 [dependencies]
 nalgebra = "*"
+regex = "*"

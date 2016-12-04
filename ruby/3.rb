@@ -1,6 +1,7 @@
-@input = File.open('./inputs/3.txt', "r").readlines.each {|l| l.chomp!}.collect! {|e| e.split(' ').map! {|e|e.to_i}}
-is_valid = ->(e){(e[0] + e[1] > e[2]) && (e[1] + e[2] > e[0]) && (e[2] + e[0] > e[1])}
-slicediff = @input.map {|e| e[0]}.each_slice(3).to_a + @input.map {|e| e[1]}.each_slice(3).to_a + @input.map {|e| e[2]}.each_slice(3).to_a
+@input = File.open('./inputs/3.txt', "r").readlines.collect! {|e| e.split(' ').map! {|e|e.to_i}}
+slicediff = (0..2).map{|i| @input.map {|e| e[i]}.each_slice(3).to_a}.flatten 1
+
+is_valid = ->(e){ e.inject(:+) > e.max * 2 }
 
 puts @input.select(&is_valid).count
 puts slicediff.select(&is_valid).count
