@@ -12,27 +12,14 @@ static GRID : [&'static[i32; 5]; 5] = [
     &[0, 0,13, 0, 0],
 ];
 
-
 fn main() {
 
+    let allowedarr=[(0,2),(1,1),(1,2),(1,3),(2,0),(2,1),(2,2),(2,3),(2,4),(3,1),(3,2),(3,3),(4,2)];
     let mut allowed = HashSet::new();
-    allowed.insert((0,2));
 
-    allowed.insert((1,1));
-    allowed.insert((1,2));
-    allowed.insert((1,3));
-
-    allowed.insert((2,0));
-    allowed.insert((2,1));
-    allowed.insert((2,2));
-    allowed.insert((2,3));
-    allowed.insert((2,4));
-
-    allowed.insert((3,1));
-    allowed.insert((3,2));
-    allowed.insert((3,3));
-
-    allowed.insert((4,2));
+    for e in allowedarr.iter() {
+        allowed.insert(e);
+    }
 
     let mut f = File::open("../inputs/2.txt").unwrap();
     let mut s = String::new();
@@ -51,11 +38,7 @@ fn main() {
                     'L' => (coord.0, coord.1 - 1),
                     _ => panic!("Malformed input")
                 };
-                if allowed.contains(&newcoord) {
-                    return newcoord;
-                } else {
-                    return coord;
-                }
+                if allowed.contains(&newcoord) { newcoord } else { coord }
             })
         )
         .map(|coord| GRID[coord.0 as usize][coord.1 as usize])
