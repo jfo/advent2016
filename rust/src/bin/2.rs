@@ -3,7 +3,6 @@ use std::io::prelude::*;
 use std::fs::File;
 use nalgebra::clamp;
 
-
 static GRID_ONE  : [&'static[i32; 3]; 3] = [
     &[1,2,3],
     &[4,5,6],

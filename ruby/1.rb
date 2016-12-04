@@ -23,7 +23,7 @@ input.each do |e|
     when :e
         place[0] += dist
     when :s
-        place[1] -= dist 
+        place[1] -= dist
     when :w
         place[0] -= dist
     end
@@ -57,7 +57,7 @@ input.each do |e|
         end
     when :s
         dist.times do
-            place[1] -= 1 
+            place[1] -= 1
             acc.push place.clone
         end
     when :w
