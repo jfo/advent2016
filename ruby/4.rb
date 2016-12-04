@@ -3,16 +3,19 @@ require 'rotn'
 @input = File.open('./inputs/4.txt', "r")
     .readlines.map {|e| e
         .chomp
-        .scan(/(^.+\-)(\d+)\[(.+)\]/)
+        .scan(/(^.+)\-(\d+)\[(.+)\]/)
         .flatten
-        .map {|e| e.split('') }
     }
     .map {|e|
         [
-            e[0].delete_if{|e| e == '-'}.sort_by {|x| [-e[0].count(x), x] }.uniq[0..4].join,
-            e[1].join.to_i,
-            e[2].join,
-            e[0].join
+            e[0].split('')
+                .delete_if{|e| e == '-'}
+                .sort_by {|x| [-e[0].count(x), x] }
+                .uniq[0..4]
+                .join,
+            e[1].to_i,
+            e[2],
+            e[0]
         ]
     }
     .select {|e| e[0] == e[2]}
