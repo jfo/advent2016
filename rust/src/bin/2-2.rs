@@ -1,4 +1,3 @@
-extern crate nalgebra;
 use std::io::prelude::*;
 use std::fs::File;
 use std::collections::HashSet;
@@ -15,7 +14,7 @@ static GRID : [&'static[i32; 5]; 5] = [
 
 fn main() {
     let allowedarr = [(0,2),(1,1),(1,2),(1,3),(2,0),(2,1),(2,2),(2,3),(2,4),(3,1),(3,2),(3,3),(4,2)];
-    let mut allowed = HashSet::<_>::from_iter(allowedarr.iter());
+    let allowed = HashSet::<_>::from_iter(allowedarr.iter());
 
     let mut f = File::open("../inputs/2.txt").unwrap();
     let mut s = String::new();
