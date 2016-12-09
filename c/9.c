@@ -5,7 +5,6 @@
 struct instruction {
     int length;
     int times;
-    /* char* cursor; */
 };
 
 char* read_into_string(FILE* fp) {
@@ -14,8 +13,6 @@ char* read_into_string(FILE* fp) {
     rewind(fp);
 
     char *input = malloc(sz);
-
-
     char c;
     int i = 0;
     while ((c = getc(fp)) != EOF ) {
@@ -58,8 +55,7 @@ long decompressed_length(char* input, int limit) {
 
             struct instruction inst = { strtoul(len, NULL, 10), strtoul(times, NULL, 10) };
             return length +
-                decompressed_length(&input[index], inst.length) *
-                inst.times +
+                decompressed_length(&input[index], inst.length) * inst.times +
                 decompressed_length(&input[index + inst.length], limit - (index + inst.length));
         } else {
             length++;
@@ -75,7 +71,7 @@ int main() {
     FILE *fp = fopen("../inputs/9.txt", "r");
     if (!fp) { exit (1); }
     char* input = read_into_string(fp);
-    printf("%li", decompressed_length(input, strlen(input) - 1));
+    printf("%li\n", decompressed_length(input, strlen(input) - 1));
 
     /* char *test = "A(2x5)BCDEFG"; */
     /* char *test = "(3x3)XYZ"; */
@@ -83,8 +79,8 @@ int main() {
     /* char *test = "(27x12)(20x12)(13x14)(7x10)(1x12)A"; */
     /* char *test = "(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN"; */
 
-    /* printf("%li", decompressed_length(test, strlen(test))); */
+    printf("%li\n", decompressed_length(test, strlen(test)));
 
 
-    /* free(input); */
+    free(input);
 }
