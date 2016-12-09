@@ -1,5 +1,5 @@
 def doodoo(src)
-    acc = []
+    acc = 0
     i = 0
     until i >= src.length
         if src[i] == '('
@@ -12,15 +12,15 @@ def doodoo(src)
             i += 1
             inst =  term.join.scan(/([0-9]+)/).flatten.map {|e|e.to_i}
             inst[1].times do
-                acc << src[i...i + inst[0]]
+                acc += inst[0]
             end
             inst[0].times { i+=1 }
         else
-            acc << src[i]
+            acc += 1
             i += 1
         end
     end
-    acc.flatten.join
+    acc
 end
 
 p doodoo("ADVENT") == "ADVENT"
@@ -34,7 +34,4 @@ input = File.open('./inputs/9.txt', "r").read.gsub(/\s+/, "")
 
 thing = doodoo(input)
 
-# until !thing.include? '('
-#     thing = doodoo(thing)
-# end
-# p thing.length
+p thing
