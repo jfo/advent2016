@@ -36,17 +36,18 @@ char* read_into_string(FILE* fp) {
 int decompressed_length(char* input) {
     int length = 0;
 
-    for (length; input[length] != '\0'; length++);
+    for (length; input[length] != '\0'; length++) {
+    };
 
     return length;
 }
 
 int main() {
-    FILE *fp = fopen("../inputs/9.txt", "r");
-    if (!fp) { exit (1); }
-    char* input = read_into_string(fp);
-    printf("%lu\n", strlen(input));
-    printf("%i\n", decompressed_length(input));
+    /* FILE *fp = fopen("../inputs/9.txt", "r"); */
+    /* if (!fp) { exit (1); } */
+    /* char* input = read_into_string(fp); */
 
-    free(input);
+    char *test = ""
+
+    /* free(input); */
 }
